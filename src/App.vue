@@ -1,6 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import BCard from '@/core/components/bases/b-card/b-card.vue'
+</script>
 
 <template>
+  <div class="p-8 flex justify-center items-center">
+    <b-card class="bg-gray-100">
+      Hello boy
+    </b-card>
+  </div>
   <div class="p-4">
     <p>
       Please design a user-friendly, single-page note-taking application using Vue 3 Composition
