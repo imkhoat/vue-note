@@ -30,6 +30,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  rounded: {
+    type: Boolean,
+    default: false,
+  },
   tag: {
     type: [String, Object] as PropType<string | ConcreteComponent>,
     default: undefined,
@@ -40,6 +44,8 @@ const { size, tag, square } = toRefs(props);
 
 const sizeClasses = computed(() => {
   switch (size.value) {
+    case BButtonSize.xs:
+      return [square.value ? 'p-1' : 'leading-5 text-sm py-1 px-2', 'gap-1'];
     case BButtonSize.sm:
       return [square.value ? 'p-1.5' : 'leading-5 text-sm py-1.5 px-3', 'gap-1.5'];
     case BButtonSize.lg:
@@ -47,6 +53,9 @@ const sizeClasses = computed(() => {
     default:
       return [square.value ? 'p-2' : 'py-2 leading-6 px-4', 'gap-2'];
   }
+});
+const roundedClass = computed(() => {
+  return props.rounded ? 'rounded-full' : '';
 });
 const tagWithDefaults = computed(() => tag?.value || 'button');
 </script>
@@ -59,6 +68,7 @@ const tagWithDefaults = computed(() => tag?.value || 'button');
       'inline-flex items-center justify-center font-medium text-base focus-visible:outline focus-visible:outline-offset rounded-md disabled:text-disabled-500 disabled:bg-disabled-300 disabled:shadow-none disabled:ring-0 disabled:cursor-not-allowed',
       sizeClasses,
       variantClasses[variant],
+      roundedClass,
     ]"
     data-testid="button"
   >
