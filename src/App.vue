@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import BCard from '@/core/components/bases/b-card/b-card.vue'
+import BCard from '@/core/components/bases/b-card/b-card.vue';
 </script>
 
 <template>
   <div class="p-8 flex justify-center items-center">
-    <b-card class="bg-gray-100">
-      Hello boy
-    </b-card>
+    <b-card class="bg-gray-100"> Hello boy </b-card>
   </div>
   <div class="p-4">
     <p>
