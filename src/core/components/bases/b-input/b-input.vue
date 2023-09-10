@@ -11,7 +11,8 @@ const getSizeClasses = {
 
 <script lang="ts" setup>
 import type { PropType, ConcreteComponent } from 'vue';
-import { computed, ref, toRefs } from 'vue';
+import { computed, onMounted, ref, toRefs } from 'vue';
+import { useFocus } from '@vueuse/core';
 import { BInputSize } from '@/core/components/bases/b-input/types';
 
 const props = defineProps({
@@ -67,23 +68,36 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  focus: {
+    type: Boolean,
+    default: false,
+  },
 });
-const emit = defineEmits<{
+const emits = defineEmits<{
   (event: 'update:modelValue', value: string | number): void;
+  (event: 'keyup.enter'): void;
 }>();
 const { modelValue, invalid } = toRefs(props);
+const targetEl = ref();
+const { focused } = useFocus(targetEl);
 
 const internalState = ref<string | number>();
 const inputValue = computed({
   get: () => modelValue.value ?? internalState.value,
   set: (value) => {
-    emit('update:modelValue', value);
+    emits('update:modelValue', value);
     internalState.value = value;
   },
 });
 
 const isAboveLimit = computed(() => inputValue.value.length > props.characterLimit);
 const charsCount = computed(() => props.characterLimit - inputValue.value.length);
+
+onMounted(() => {
+  if (props.focus) {
+    focused.value = true;
+  }
+});
 </script>
 
 <template>
@@ -110,7 +124,9 @@ const charsCount = computed(() => props.characterLimit - inputValue.value.length
         v-bind="$attrs"
         class="min-w-[80px] w-full text-base outline-none appearance-none text-neutral-800 disabled:cursor-not-allowed disabled:bg-transparent read-only:bg-transparent"
         :size="1"
+        ref="targetEl"
         data-testid="input-field"
+        @keyup.enter="emits('keyup.enter')"
       />
       <slot name="suffix" />
     </component>

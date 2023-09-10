@@ -6,8 +6,17 @@
       </b-button>
     </teleport>
     <b-dialog v-model="isOpenNewModal">
-      <b-card title="Create a Note" sub-title="Please fill you notes title" class="w-[500px]">
-        <b-input placeholder="Type here..." v-model="title"></b-input>
+      <b-card
+        title="Create a Note"
+        sub-title="Please fill you notes title"
+        class="w-[80vw] sm:w-[500px]"
+      >
+        <b-input
+          placeholder="Type here..."
+          v-model="title"
+          focus
+          @keyup.enter="onCreateNewNote"
+        ></b-input>
         <template #footer>
           <div class="flex justify-end items-center gap-x-2">
             <b-button @click="onCreateNewNote">Add a Note</b-button>
@@ -39,9 +48,14 @@ function onToggleNewDialog() {
   isOpenNewModal.value = !isOpenNewModal.value;
 }
 
+function resetForm() {
+  title.value = '';
+}
+
 function onCreateNewNote() {
   emits('create', title.value);
   onToggleNewDialog();
+  resetForm();
 }
 
 // hooks
