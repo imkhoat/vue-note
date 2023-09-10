@@ -74,18 +74,20 @@ const onEscKeyDown = () => {
     leave-from-class="opacity-100 translate-y-0"
     leave-to-class="opacity-0 translate-y-10"
   >
-    <component
-      v-model="isOpen"
-      :is="tag || 'div'"
-      v-if="isOpen"
-      ref="modalRef"
-      aria-modal="true"
-      data-testid="modal"
-      tabindex="-1"
-      class="fixed inset-0 w-fit h-fit m-auto border border-neutral-100 bg-white shadow-xl rounded-xl outline-none"
-      @keydown.esc="onEscKeyDown"
-    >
-      <slot />
-    </component>
+    <div>
+      <component
+        v-model="isOpen"
+        :is="tag || 'div'"
+        v-if="isOpen"
+        ref="modalRef"
+        aria-modal="true"
+        data-testid="modal"
+        tabindex="-1"
+        class="fixed inset-0 w-fit h-fit m-auto border border-neutral-100 bg-white shadow-xl rounded-xl outline-none"
+        @keydown.esc="onEscKeyDown"
+      >
+        <slot />
+      </component>
+    </div>
   </transition>
 </template>

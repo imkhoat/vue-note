@@ -1,5 +1,5 @@
 <template>
-  <b-card class="relative" :style="{ backgroundColor: item.color }" :title="item.title">
+  <b-card class="relative h-48" :style="{ backgroundColor: item.color }" :title="item.title">
     <b-button
       class="absolute top-3 right-3 !ring-white hover:!bg-transparent"
       size="xs"
@@ -8,7 +8,7 @@
       variant="secondary"
       @click="onRemoveNote"
     >
-      <i-close class="w-3 h-3 text-gray-200"></i-close>
+      <i-close class="w-2.5 h-2.5 text-gray-200"></i-close>
     </b-button>
     <template #footer>
       <div class="text-sm text-right">{{ item.createDate }}</div>
