@@ -6,7 +6,11 @@
       </b-button>
     </teleport>
     <b-dialog v-model="isOpenNewModal">
-      <b-card title="New Note" class="w-[500px]">
+      <b-card
+        title="New Note"
+        sub-title="Please fill you notes title and click Add a Note"
+        class="w-[500px]"
+      >
         <b-input placeholder="Type here..." v-model="title"></b-input>
         <template #footer>
           <div class="flex justify-end items-center gap-x-2">
