@@ -2,7 +2,12 @@
   <div class="b-card shadow overflow-hidden rounded-xl flex flex-col justify-start items-stretch">
     <div v-if="$slots.header || title || subTitle" class="px-4 py-5 sm:px-6">
       <slot name="header">
-        <h3 v-if="title" class="text-base font-semibold leading-6 text-gray-900">{{ title }}</h3>
+        <h3
+          v-if="title"
+          class="text-base font-semibold leading-6 text-gray-900 text-ellipsis overflow-hidden"
+        >
+          {{ title }}
+        </h3>
         <div v-if="subTitle" class="max-w-xl text-sm text-gray-500">
           <p>
             {{ subTitle }}
