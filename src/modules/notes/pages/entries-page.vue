@@ -1,14 +1,18 @@
 <template>
-  <div class="entries-page p-10">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-      <note-card
-        v-for="(item, index) in notes"
-        :key="index + '__note-item'"
-        :item="item"
-        class="w-full"
-        @remove="onRemoveNote(index)"
-      ></note-card>
-    </div>
+  <div class="entries-page">
+    <b-container>
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
+      >
+        <note-card
+          v-for="(item, index) in notes"
+          :key="index + '__note-item'"
+          :item="item"
+          class="w-full"
+          @remove="onRemoveNote(index)"
+        ></note-card>
+      </div>
+    </b-container>
     <new-note-card @create="onCreateNewNote"></new-note-card>
   </div>
 </template>
@@ -16,21 +20,47 @@
 import { ref } from 'vue';
 import type { Note } from '@/modules/notes/types/note';
 import NoteCard from '@/modules/notes/_partials/note-card.vue';
-import BButton from '@/core/components/bases/b-button/b-button.vue';
+import BContainer from '@/core/components/bases/b-container/b-container.vue';
+import dayjs from 'dayjs';
 import NewNoteCard from '@/modules/notes/_partials/new-note-card.vue';
 const notes = ref<Note[]>([
-  { title: 'Title 01', uuid: 'ogogsomgomeg', createDate: '13 Jun, 2023', color: _generateColor() },
-  { title: 'Title 01', uuid: 'ogogsomgomeg', createDate: '13 Jun, 2023', color: _generateColor() },
-  { title: 'Title 01', uuid: 'ogogsomgomeg', createDate: '13 Jun, 2023', color: _generateColor() },
-  { title: 'Title 01', uuid: 'ogogsomgomeg', createDate: '13 Jun, 2023', color: _generateColor() },
-  { title: 'Title 01', uuid: 'ogogsomgomeg', createDate: '13 Jun, 2023', color: _generateColor() },
+  {
+    title: 'Title 01',
+    uuid: 'ogogsomgomeg',
+    createDate: _formatedCurentDate(),
+    color: _generateColor(),
+  },
+  {
+    title: 'Title 01',
+    uuid: 'ogogsomgomeg',
+    createDate: _formatedCurentDate(),
+    color: _generateColor(),
+  },
+  {
+    title: 'Title 01',
+    uuid: 'ogogsomgomeg',
+    createDate: _formatedCurentDate(),
+    color: _generateColor(),
+  },
+  {
+    title: 'Title 01',
+    uuid: 'ogogsomgomeg',
+    createDate: _formatedCurentDate(),
+    color: _generateColor(),
+  },
+  {
+    title: 'Title 01',
+    uuid: 'ogogsomgomeg',
+    createDate: _formatedCurentDate(),
+    color: _generateColor(),
+  },
 ]);
 
 function onCreateNewNote(title: string) {
   const newNote: Note = {
     uuid: _generateUUID(),
     title: title,
-    createDate: new Date(),
+    createDate: _formatedCurentDate(),
     color: _generateColor(),
   };
   notes.value.push(newNote);
@@ -58,5 +88,9 @@ function _generateUUID() {
     }
     return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
   });
+}
+
+function _formatedCurentDate() {
+  return dayjs().format('ddd MMM D YYYY');
 }
 </script>

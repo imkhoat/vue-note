@@ -1,5 +1,5 @@
 <template>
-  <div class="b-card shadow sm:rounded-lg">
+  <div class="b-card shadow overflow-hidden sm:rounded-lg">
     <div v-if="$slots.header || title || subTitle" class="px-4 py-5 sm:px-6">
       <slot name="header">
         <h3 v-if="title" class="text-base font-semibold leading-6 text-gray-900">{{ title }}</h3>

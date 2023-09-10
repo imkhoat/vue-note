@@ -1,9 +1,9 @@
 <script lang="ts">
 export const variantClasses = {
   [BButtonVariant.primary]:
-    'text-white shadow hover:shadow-md active:shadow bg-primary-600 hover:bg-primary-700 active:bg-primary-800 disabled:bg-disabled-300',
+    'text-white bg-primary-600 hover:bg-primary-700 active:bg-primary-800 disabled:bg-disabled-300',
   [BButtonVariant.secondary]:
-    'text-primary-600 hover:bg-primary-100 hover:text-primary-700 active:bg-primary-200 active:text-primary-800 ring-1 ring-inset ring-primary-600 shadow hover:shadow-md active:shadow hover:ring-primary-700 active:ring-primary-800 disabled:ring-1 disabled:ring-disabled-300 disabled:bg-white/50',
+    'text-primary-600 hover:bg-primary-100 hover:text-primary-700 active:bg-primary-200 active:text-primary-800 ring-1 ring-inset ring-primary-600 hover:ring-primary-700 active:ring-primary-800 disabled:ring-1 disabled:ring-disabled-300 disabled:bg-white/50',
   [BButtonVariant.tertiary]:
     'text-primary-600 hover:bg-primary-100 hover:text-primary-700 active:bg-primary-200 active:text-primary-800 disabled:bg-transparent',
 };
