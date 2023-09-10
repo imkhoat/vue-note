@@ -21,11 +21,11 @@
 <script setup lang="ts">
 defineProps<{
   title?: {
-    type: String;
+    type: string | null;
     default: null;
   };
   subTitle?: {
-    type: String;
+    type: string | null;
     default: null;
   };
 }>();

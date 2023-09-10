@@ -10,6 +10,8 @@ module.exports = {
     },
     colors: {
       primary: { ...colors.green },
+      neutral: { ...colors.slate },
+      white: '#FFF'
     },
   },
   plugins: [],
