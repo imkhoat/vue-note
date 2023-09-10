@@ -9,10 +9,12 @@ module.exports = {
       padding: '2rem',
     },
     colors: {
+      ...colors,
       primary: { ...colors.green },
       neutral: { ...colors.slate },
+      negative: { ...colors.rose },
       gray: { ...colors.gray },
-      white: '#FFF'
+      white: '#FFF',
     },
   },
   plugins: [],

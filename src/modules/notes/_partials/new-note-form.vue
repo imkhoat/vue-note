@@ -6,11 +6,7 @@
       </b-button>
     </teleport>
     <b-dialog v-model="isOpenNewModal">
-      <b-card
-        title="New Note"
-        sub-title="Please fill you notes title and click Add a Note"
-        class="w-[500px]"
-      >
+      <b-card title="Create a Note" sub-title="Please fill you notes title" class="w-[500px]">
         <b-input placeholder="Type here..." v-model="title"></b-input>
         <template #footer>
           <div class="flex justify-end items-center gap-x-2">
@@ -28,14 +24,17 @@ import BCard from '@/core/components/bases/b-card/b-card.vue';
 import BInput from '@/core/components/bases/b-input/b-input.vue';
 import BDialog from '@/core/components/bases/b-dialog/b-dialog.vue';
 import IPlus from '@/core/components/icons/i-plus.vue';
-import { onMounted, reactive, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
+// props & emits
 const emits = defineEmits(['create']);
 
+// data
 const isMounted = ref(false);
 const isOpenNewModal = ref(false);
 const title = ref('');
 
+//methods
 function onToggleNewDialog() {
   isOpenNewModal.value = !isOpenNewModal.value;
 }
@@ -45,6 +44,7 @@ function onCreateNewNote() {
   onToggleNewDialog();
 }
 
+// hooks
 onMounted(() => {
   isMounted.value = true;
 });
