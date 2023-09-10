@@ -55,7 +55,7 @@ const sizeClasses = computed(() => {
   }
 });
 const roundedClass = computed(() => {
-  return props.rounded ? 'rounded-full' : '';
+  return props.rounded ? 'rounded-full' : 'rounded-md';
 });
 const tagWithDefaults = computed(() => tag?.value || 'button');
 </script>
@@ -65,7 +65,7 @@ const tagWithDefaults = computed(() => tag?.value || 'button');
     v-bind="$attrs"
     :disabled="disabled"
     :class="[
-      'inline-flex items-center justify-center font-medium text-base focus-visible:outline focus-visible:outline-offset rounded-md disabled:text-disabled-500 disabled:bg-disabled-300 disabled:shadow-none disabled:ring-0 disabled:cursor-not-allowed',
+      'inline-flex items-center justify-center font-medium text-base focus-visible:outline focus-visible:outline-offset disabled:text-disabled-500 disabled:bg-disabled-300 disabled:shadow-none disabled:ring-0 disabled:cursor-not-allowed',
       sizeClasses,
       variantClasses[variant],
       roundedClass,
