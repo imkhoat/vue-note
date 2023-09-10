@@ -1,9 +1,21 @@
-import { ref } from 'vue';
+import { computed, reactive, ref } from 'vue';
 import dayjs from 'dayjs';
 import type { Note } from '../types/note';
 
 export function useNote() {
+  // data
   const notes = ref<Note[]>([]);
+  const filter = reactive({
+    search: '',
+    sort: '',
+  });
+
+  // computed
+  const filtedNotes = computed(() => {
+    return notes.value.filter((item) => {
+      return item.title.toLowerCase().includes(filter.search.toLowerCase());
+    });
+  });
 
   function _generateColor() {
     return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
@@ -44,5 +56,5 @@ export function useNote() {
     notes.value.splice(index, 1);
   }
 
-  return { notes, handleCreateNewNote, handleRemoveNote };
+  return { notes, filter, filtedNotes, handleCreateNewNote, handleRemoveNote };
 }

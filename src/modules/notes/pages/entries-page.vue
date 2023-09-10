@@ -1,12 +1,15 @@
 <template>
   <div class="entries-page">
     <b-container>
+      <div class="flex justify-end items-center mb-4">
+        <filter-box v-model="filter.search"></filter-box>
+      </div>
       <div
-        v-if="notes.length > 0"
+        v-if="filtedNotes.length > 0"
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
       >
         <note-card
-          v-for="(item, index) in notes"
+          v-for="(item, index) in filtedNotes"
           :key="index + '__note-item'"
           :item="item"
           class="w-full"
@@ -23,9 +26,10 @@ import NoteCard from '@/modules/notes/_partials/note-card.vue';
 import BContainer from '@/core/components/bases/b-container/b-container.vue';
 import NewNoteForm from '@/modules/notes/_partials/new-note-form.vue';
 import EmptyCard from '@/modules/notes/_partials/empty-card.vue';
+import FilterBox from '@/modules/notes/_partials/filter-box.vue';
 import { useNote } from '@/modules/notes/composable/useNote';
 
-const { notes, handleCreateNewNote, handleRemoveNote } = useNote();
+const { filtedNotes, filter, handleCreateNewNote, handleRemoveNote } = useNote();
 
 function onCreateNewNote(title: string) {
   handleCreateNewNote(title);
