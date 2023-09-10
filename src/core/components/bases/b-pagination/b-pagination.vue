@@ -48,13 +48,26 @@ import BInput from '@/core/components/bases/b-input/b-input.vue';
 import { toValue } from '@vueuse/core';
 import { computed, ref, watch } from 'vue';
 
+// props & emits
 const props = defineProps<{
   modelValue: number;
   pageSize: number;
   total: number;
 }>();
 const emits = defineEmits(['change', 'update:modelValue', 'update:pageSize']);
-const currentPage = ref(props.modelValue);
+
+// data
+const currentPage = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(newVal: boolean) {
+    emits('update:modelValue', newVal);
+    emits('change', newVal);
+  },
+});
+
+// computed
 const currentPageSize = computed({
   get() {
     return props.pageSize;
@@ -69,23 +82,25 @@ const pageCount = computed(() => {
 const isFirstPage = computed(() => Number(currentPage.value) === 1);
 const isLastPage = computed(() => Number(currentPage.value) === pageCount.value);
 
+// methods
 function prev() {
   currentPage.value--;
-  changePage(currentPage.value);
 }
 
 function next() {
   currentPage.value++;
-  changePage(currentPage.value);
 }
 
 function changePage(page: number) {
-  emits('update:modelValue', page);
-  emits('change', page);
+  currentPage.value = page;
 }
 
 watch(
   () => props.total,
-  () => {}
+  () => {
+    if (props.total <= Number(currentPage.value) * Number(currentPageSize.value)) {
+      currentPage.value = Math.ceil(props.total / Number(currentPageSize.value));
+    }
+  }
 );
 </script>
