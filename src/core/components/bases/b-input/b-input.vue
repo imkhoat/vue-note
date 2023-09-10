@@ -94,10 +94,10 @@ const charsCount = computed(() => props.characterLimit - inputValue.value.length
     <component
       :is="wrapperTag"
       :class="[
-        'flex items-center gap-2 px-4 bg-white rounded-md ring-1 text-neutral-400 hover:ring-primary-600 focus-within:caret-primary-600 active:caret-primary-600 active:ring-primary-600 active:ring-2 focus-within:ring-primary-600 focus-within:ring-2 focus-within:outline focus-within:outline-offset',
+        'flex items-center gap-2 px-4 bg-white rounded-md ring-1 text-neutral-400 hover:ring-primary-600 focus-within:caret-primary-600 active:caret-primary-600 active:ring-primary-600 active:ring-2 focus-within:ring-primary-600 focus-within:ring-2',
         {
           'ring-2 ring-negative-600': invalid,
-          'ring-1 ring-neutral-200': !invalid,
+          'ring-1 ring-neutral-300': !invalid,
         },
         getSizeClasses[size],
         wrapperClass,

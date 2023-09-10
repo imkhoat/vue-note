@@ -11,9 +11,13 @@ export const variantClasses = {
 
 <script lang="ts" setup>
 import { type PropType, type ConcreteComponent, computed, toRefs } from 'vue';
-import { BButtonSize, BButtonVariant } from '@/core/components/bases/b-button/types';
+import { BButtonSize, BButtonVariant, BButtonColor } from '@/core/components/bases/b-button/types';
 
 const props = defineProps({
+  color: {
+    type: String as PropType<`${BButtonColor}`>,
+    default: BButtonColor.primary,
+  },
   size: {
     type: String as PropType<`${BButtonSize}`>,
     default: BButtonSize.base,

@@ -10,3 +10,12 @@ export enum BButtonVariant {
   secondary = 'secondary',
   tertiary = 'tertiary',
 }
+
+export enum BButtonColor {
+  primary = 'primary',
+  danger = 'danger',
+  warning = 'warning',
+  info = 'info',
+  success = 'success',
+  white = 'white',
+}

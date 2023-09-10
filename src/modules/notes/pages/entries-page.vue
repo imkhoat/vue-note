@@ -13,7 +13,7 @@
         ></note-card>
       </div>
     </b-container>
-    <new-note-card @create="onCreateNewNote"></new-note-card>
+    <new-note-form @create="onCreateNewNote"></new-note-form>
   </div>
 </template>
 <script lang="ts" setup>
@@ -22,7 +22,7 @@ import type { Note } from '@/modules/notes/types/note';
 import NoteCard from '@/modules/notes/_partials/note-card.vue';
 import BContainer from '@/core/components/bases/b-container/b-container.vue';
 import dayjs from 'dayjs';
-import NewNoteCard from '@/modules/notes/_partials/new-note-card.vue';
+import NewNoteCard from '@/modules/notes/_partials/new-note-form.vue';
 const notes = ref<Note[]>([
   {
     title: 'Title 01',
