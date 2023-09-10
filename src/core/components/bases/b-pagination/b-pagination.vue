@@ -70,7 +70,7 @@ const currentPage = computed({
 // computed
 const currentPageSize = computed({
   get() {
-    return props.pageSize;
+    return Math.max(1, props.pageSize);
   },
   set(newVal: boolean) {
     emits('update:pageSize', newVal);
@@ -103,4 +103,9 @@ watch(
     }
   }
 );
+watch(currentPageSize, () => {
+  if (props.total <= Number(currentPage.value) * Number(currentPageSize.value)) {
+    currentPage.value = Math.ceil(props.total / Number(currentPageSize.value));
+  }
+});
 </script>
