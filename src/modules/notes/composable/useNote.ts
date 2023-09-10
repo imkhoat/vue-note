@@ -4,17 +4,27 @@ import type { Note } from '../types/note';
 
 export function useNote() {
   // data
-  const notes = ref<Note[]>([]);
+  const _notes = ref<Note[]>([]);
   const filter = reactive({
     search: '',
     sort: '',
+    page: 1,
+    pageSize: 2,
   });
 
   // computed
   const filtedNotes = computed(() => {
-    return notes.value.filter((item) => {
+    return _notes.value.filter((item) => {
       return item.title.toLowerCase().includes(filter.search.toLowerCase());
     });
+  });
+  const total = computed(() => {
+    return filtedNotes.value?.length;
+  });
+  const paginationNotes = computed(() => {
+    const firstIndex = (filter.page - 1) * filter.pageSize;
+    const lastIndex = filter.page * filter.pageSize;
+    return filtedNotes.value.slice(firstIndex, lastIndex);
   });
 
   function _generateColor() {
@@ -49,12 +59,20 @@ export function useNote() {
       createDate: _formatedCurentDate(),
       color: _generateColor(),
     };
-    notes.value.push(newNote);
+    _notes.value.push(newNote);
   }
 
   function handleRemoveNote(index: number) {
-    notes.value.splice(index, 1);
+    _notes.value.splice(index, 1);
   }
 
-  return { notes, filter, filtedNotes, handleCreateNewNote, handleRemoveNote };
+  return {
+    _notes,
+    paginationNotes,
+    filter,
+    total,
+    filtedNotes,
+    handleCreateNewNote,
+    handleRemoveNote,
+  };
 }

@@ -122,7 +122,7 @@ onMounted(() => {
       <input
         v-model="inputValue"
         v-bind="$attrs"
-        class="min-w-[80px] w-full text-base outline-none appearance-none text-neutral-800 disabled:cursor-not-allowed disabled:bg-transparent read-only:bg-transparent"
+        class="w-full text-base outline-none appearance-none text-neutral-800 disabled:cursor-not-allowed disabled:bg-transparent read-only:bg-transparent"
         :size="1"
         ref="targetEl"
         data-testid="input-field"
