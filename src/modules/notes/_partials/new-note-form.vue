@@ -28,12 +28,13 @@
   </div>
 </template>
 <script setup lang="ts">
-import BButton from '@/core/components/bases/b-button/b-button.vue';
+import { onMounted, ref } from 'vue';
+import { onKeyStroke } from '@vueuse/core';
+import IPlus from '@/core/components/icons/i-plus.vue';
 import BCard from '@/core/components/bases/b-card/b-card.vue';
 import BInput from '@/core/components/bases/b-input/b-input.vue';
+import BButton from '@/core/components/bases/b-button/b-button.vue';
 import BDialog from '@/core/components/bases/b-dialog/b-dialog.vue';
-import IPlus from '@/core/components/icons/i-plus.vue';
-import { onMounted, ref } from 'vue';
 
 // props & emits
 const emits = defineEmits(['create']);
@@ -61,5 +62,8 @@ function onCreateNewNote() {
 // hooks
 onMounted(() => {
   isMounted.value = true;
+});
+onKeyStroke(['Control', 'Ctrl', 'Ctl'], (e) => {
+  onToggleNewDialog();
 });
 </script>
