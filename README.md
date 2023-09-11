@@ -9,9 +9,9 @@ The following requirements should be met:
 * [x] The layout of the application must be responsive to ensure optimal user experience.
 * [x] Users should be able to seamlessly add notes to the application.
 * [x] The application should allow users to effortlessly remove notes when necessary.
-* [ ] The user should be able to sort by date create the notes.
+* [x] The user should be able to sort by date create the notes.
 * [x] The user should be able to search for text in the notes.
-* [ ] If the number of notes is high, pagination should be implemented.
+* [x] If the number of notes is high, pagination should be implemented.
 * [x] To add an element of visual interest, the background of the application should be randomly generated.
 * [x] Finally, each note element should feature a date stamp at the bottom to help users keep track of when they made each note.
 

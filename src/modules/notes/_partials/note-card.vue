@@ -11,7 +11,7 @@
       <i-close class="w-2.5 h-2.5 text-gray-200"></i-close>
     </b-button>
     <template #footer>
-      <div class="text-sm text-right">{{ item.createDate }}</div>
+      <div class="text-sm text-right">{{ item.formatedCreateDate }}</div>
     </template>
   </b-card>
 </template>

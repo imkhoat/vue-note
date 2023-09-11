@@ -1,9 +1,13 @@
 <template>
   <div class="entries-page">
     <b-container>
-      <div v-if="filtedNotes.length > 0" class="flex flex-col justify-start items-stretch gap-y-4">
-        <div class="entries-page__filter flex justify-end items-center">
-          <filter-box v-model="filter.search"></filter-box>
+      <div v-if="_notes.length > 0" class="flex flex-col justify-start items-stretch gap-y-4">
+        <div class="entries-page__filter flex justify-end items-center w-full">
+          <filter-box
+            v-model="filter.search"
+            v-model:sort-model-value="filter.sort"
+            class="w-full sm:w-fit"
+          ></filter-box>
         </div>
         <div
           class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
@@ -38,8 +42,15 @@ import EmptyCard from '@/modules/notes/_partials/empty-card.vue';
 import FilterBox from '@/modules/notes/_partials/filter-box.vue';
 import { useNote } from '@/modules/notes/composable/useNote';
 
-const { paginationNotes, filtedNotes, filter, total, handleCreateNewNote, handleRemoveNote } =
-  useNote();
+const {
+  _notes,
+  paginationNotes,
+  filtedNotes,
+  filter,
+  total,
+  handleCreateNewNote,
+  handleRemoveNote,
+} = useNote();
 
 function onCreateNewNote(title: string) {
   handleCreateNewNote(title);
