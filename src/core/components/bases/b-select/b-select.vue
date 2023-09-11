@@ -56,10 +56,16 @@ const state = computed({
     return props.modelValue;
   },
   set(newVal) {
-    console.log('update:modelValue', newVal);
     emit('update:modelValue', newVal);
   },
 });
+
+const getSizeClasses = {
+  [BSelectSize.xs]: ' h-[30px]',
+  [BSelectSize.sm]: ' h-[34px]',
+  [BSelectSize.base]: 'h-[40px]',
+  [BSelectSize.lg]: 'h-[48px]',
+};
 const chevronRotated = ref(false);
 
 const clickHandler = () => (chevronRotated.value = true);
@@ -72,7 +78,7 @@ const keydownHandler = () => (chevronRotated.value = true);
     <span class="pb-1 text-sm font-medium text-neutral-900 font-body"> {{ label }} </span>
     <span
       :class="[
-        'relative flex flex-col rounded-md focus-within:outline focus-within:outline-offset ring-inset focus:ring-primary-700 focus:ring-2 ring-1 ring-neutral-300 hover:ring-primary-700 active:ring-2 active:ring-primary-700 disabled:ring-disabled-200',
+        'relative flex flex-col rounded-md outline-none focus-within:outline focus-within:outline-offset ring-inset bg-white focus:ring-primary-700 focus:ring-2 ring-1 ring-neutral-300 hover:ring-primary-700 active:ring-2 active:ring-primary-700 disabled:ring-disabled-200',
         wrapperClassName,
         { '!ring-negative-700 ring-2': invalid && !disabled },
       ]"
@@ -86,6 +92,7 @@ const keydownHandler = () => (chevronRotated.value = true);
         :class="[
           'appearance-none disabled:cursor-not-allowed cursor-pointer pl-4 pr-3.5 text-neutral-900  outline-none bg-transparent rounded-md disabled:bg-disabled-100 disabled:text-disabled-900 ',
           {
+            'py-1': size === BSelectSize.xs,
             'py-1.5': size === BSelectSize.sm,
             'py-2': size === BSelectSize.base,
             'py-3 text-base': size === BSelectSize.lg,
@@ -120,7 +127,7 @@ const keydownHandler = () => (chevronRotated.value = true);
       <slot name="chevron">
         <i-down
           :class="[
-            'absolute w-[14px] h-[14px] -translate-y-1 pointer-events-none top-1/2 right-4 transition easy-in-out duration-0.5',
+            'absolute w-[12px] h-[12px] -translate-y-1 pointer-events-none top-1/2 right-4 transition easy-in-out duration-0.5',
             disabled ? 'text-disabled-500' : 'text-neutral-500',
             chevronRotated ? 'rotate-180' : '',
           ]"

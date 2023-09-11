@@ -54,7 +54,6 @@ const sort = computed({
     return props.sortModelValue;
   },
   set(newVal: string) {
-    console.log('update:sortModelValue', newVal);
     emit('update:sortModelValue', newVal);
   },
 });
