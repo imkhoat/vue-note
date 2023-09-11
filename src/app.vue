@@ -7,7 +7,6 @@ import router from './core/router';
 const layout = shallowRef('div');
 
 router.afterEach((to) => {
-  console.log(to?.meta?.layout);
   layout.value = layouts[to?.meta?.layout] || 'div';
 });
 </script>

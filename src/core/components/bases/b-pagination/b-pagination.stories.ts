@@ -3,16 +3,16 @@
 // Replace vue3 with vue if you are using Storybook for Vue 2
 import type { Meta, StoryObj } from '@storybook/vue3';
 
-import BCard from '@/core/components/bases/b-card/b-card.vue';
+import BPagination from '@/core/components/bases/b-pagination/b-pagination.vue';
 
-const meta: Meta<typeof BCard> = {
-  title: 'Bases/BCard',
-  component: BCard,
+const meta: Meta<typeof BPagination> = {
+  title: 'Bases/BPagination',
+  component: BPagination,
 };
 
 export default meta;
 
-type Story = StoryObj<typeof BCard>;
+type Story = StoryObj<typeof BPagination>;
 /*
  *👇 Render functions are a framework specific feature to allow you control on how the component renders.
  * See https://storybook.js.org/docs/vue/api/csf
@@ -20,16 +20,15 @@ type Story = StoryObj<typeof BCard>;
  */
 export const Default: Story = {
   render: () => ({
-    components: { BCard },
+    components: { BPagination },
     data() {
       return {
-        dialogState: false,
+        currentPage: 1,
       };
     },
     template: `
-      <BCard>
-        Hello world
-      </BCard>
+      <BPagination :total="10" v-model="currentPage" :pageSize="2">
+      </BPagination>
     `,
   }),
 };

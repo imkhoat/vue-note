@@ -99,13 +99,13 @@ watch(
   () => props.total,
   () => {
     if (props.total <= Number(currentPage.value) * Number(currentPageSize.value)) {
-      currentPage.value = Math.ceil(props.total / Number(currentPageSize.value));
+      currentPage.value = Math.max(1, Math.ceil(props.total / Number(currentPageSize.value)));
     }
   }
 );
 watch(currentPageSize, () => {
   if (props.total <= Number(currentPage.value) * Number(currentPageSize.value)) {
-    currentPage.value = Math.ceil(props.total / Number(currentPageSize.value));
+    currentPage.value = Math.max(1, Math.ceil(props.total / Number(currentPageSize.value)));
   }
 });
 </script>

@@ -1,10 +1,11 @@
 import { computed, reactive, ref } from 'vue';
 import dayjs from 'dayjs';
 import type { Note } from '../types/note';
+import { useStorage } from '@vueuse/core';
 
 export function useNote() {
   // data
-  const _notes = ref<Note[]>([]);
+  const _notes = useStorage('vue3-notes__notes', [] as Note[]);
   const filter = reactive({
     search: '',
     sort: 'DATE',
@@ -14,22 +15,27 @@ export function useNote() {
 
   // computed
   const filtedNotes = computed(() => {
-    const items = _notes.value.filter((item) => {
+    const items = _notes.value.filter((item: Note) => {
       return item.title.toLowerCase().includes(filter.search.toLowerCase());
     });
     if (filter.sort === 'DATE') {
-      return items.sort((a, b) => {
+      return items.sort((a: Note, b: Note) => {
         return dayjs(a.createDate).isBefore(dayjs(b.createDate)) ? 0 : 1;
       });
     } else if (filter.sort === 'NAME') {
-      return items.sort((a, b) => {
+      return items.sort((a: Note, b: Note) => {
         return a.title.localeCompare(b.title);
       });
     } else {
       return items;
     }
   });
+
   const total = computed(() => {
+    return _notes.value?.length;
+  });
+
+  const totalFiltedNotes = computed(() => {
     return filtedNotes.value?.length;
   });
   const paginationNotes = computed(() => {
@@ -38,6 +44,7 @@ export function useNote() {
     return filtedNotes.value.slice(firstIndex, lastIndex);
   });
 
+  // methods
   function _generateColor() {
     return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
   }
@@ -84,11 +91,11 @@ export function useNote() {
   }
 
   return {
-    _notes,
-    paginationNotes,
     filter,
     total,
     filtedNotes,
+    paginationNotes,
+    totalFiltedNotes,
     handleCreateNewNote,
     handleRemoveNote,
   };
