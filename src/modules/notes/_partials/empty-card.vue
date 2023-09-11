@@ -2,7 +2,7 @@
   <div
     class="flex flex-col justify-center items-center gap-y-4 w-full h-48 m-auto bg-gray-50 border-dashed border-2 border-gray-100 rounded-xl text-gray-300"
   >
-    <i-archive class="w-12 h-12"></i-archive>
+    <i-archive class="!w-16 !h-16"></i-archive>
     <p>
       No notes found, click
       <b-button size="xs" rounded square>

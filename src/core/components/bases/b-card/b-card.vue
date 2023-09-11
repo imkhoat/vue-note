@@ -25,13 +25,7 @@
 </template>
 <script setup lang="ts">
 defineProps<{
-  title?: {
-    type: string | null;
-    default: null;
-  };
-  subTitle?: {
-    type: string | null;
-    default: null;
-  };
+  title?: string | null;
+  subTitle?: string | null;
 }>();
 </script>

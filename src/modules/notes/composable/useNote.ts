@@ -7,16 +7,27 @@ export function useNote() {
   const _notes = ref<Note[]>([]);
   const filter = reactive({
     search: '',
-    sort: '',
+    sort: 'DATE',
     page: 1,
-    pageSize: 2,
+    pageSize: 10,
   });
 
   // computed
   const filtedNotes = computed(() => {
-    return _notes.value.filter((item) => {
+    const items = _notes.value.filter((item) => {
       return item.title.toLowerCase().includes(filter.search.toLowerCase());
     });
+    if (filter.sort === 'DATE') {
+      return items.sort((a, b) => {
+        return dayjs(a.createDate).isBefore(dayjs(b.createDate)) ? 0 : 1;
+      });
+    } else if (filter.sort === 'NAME') {
+      return items.sort((a, b) => {
+        return a.title.localeCompare(b.title);
+      });
+    } else {
+      return items;
+    }
   });
   const total = computed(() => {
     return filtedNotes.value?.length;
@@ -49,14 +60,20 @@ export function useNote() {
   }
 
   function _formatedCurentDate() {
-    return dayjs().format('ddd MMM D YYYY');
+    const date = dayjs();
+    return {
+      date: date.toDate(),
+      formatedDate: date.format('ddd MMM D YYYY hh:mm'),
+    };
   }
 
   function handleCreateNewNote(title: string) {
+    const { date: createDate, formatedDate: formatedCreateDate } = _formatedCurentDate();
     const newNote: Note = {
       uuid: _generateUUID(),
       title: title,
-      createDate: _formatedCurentDate(),
+      createDate,
+      formatedCreateDate,
       color: _generateColor(),
     };
     _notes.value.push(newNote);

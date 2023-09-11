@@ -17,7 +17,7 @@ import { BInputSize } from '@/core/components/bases/b-input/types';
 
 const props = defineProps({
   modelValue: {
-    type: [String, Number],
+    type: [String, Number] as PropType<string | number>,
     default: '',
   },
   wrapperTag: {
@@ -101,14 +101,14 @@ onMounted(() => {
 </script>
 
 <template>
-  <label>
+  <label :class="$attrs.class">
     <span :class="['text-sm font-medium', { 'cursor-not-allowed text-disabled-400': disabled }]">
       {{ label }}
     </span>
     <component
       :is="wrapperTag"
       :class="[
-        'flex items-center gap-2 px-4 bg-white rounded-md ring-1 text-neutral-400 hover:ring-primary-600 focus-within:caret-primary-600 active:caret-primary-600 active:ring-primary-600 active:ring-2 focus-within:ring-primary-600 focus-within:ring-2',
+        'flex justify-start items-center gap-2 px-4 bg-white rounded-md ring-1 text-neutral-400 hover:ring-primary-600 focus-within:caret-primary-600 active:caret-primary-600 active:ring-primary-600 active:ring-2 focus-within:ring-primary-600 focus-within:ring-2',
         {
           'ring-2 ring-negative-600': invalid,
           'ring-1 ring-neutral-300': !invalid,
@@ -122,7 +122,7 @@ onMounted(() => {
       <input
         v-model="inputValue"
         v-bind="$attrs"
-        class="w-full text-base outline-none appearance-none text-neutral-800 disabled:cursor-not-allowed disabled:bg-transparent read-only:bg-transparent"
+        class="w-full flex-grow text-base outline-none appearance-none text-neutral-800 disabled:cursor-not-allowed disabled:bg-transparent read-only:bg-transparent"
         :size="1"
         ref="targetEl"
         data-testid="input-field"
